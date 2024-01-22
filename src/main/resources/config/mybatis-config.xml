@@ -3,5 +3,24 @@
 <configuration>
 
     <!-- 주석을 지우고 mybatis 설정 파일 내용을 작성하세요. -->
+    <properties resource="config/connection-info.properties"/>
+
+
+    <environments default="dev">
+        <environment id="dev">
+            <transactionManager type="JDBC"/>
+
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://localhost/menudb"/>
+                <property name="username" value="minsup"/>
+                <property name="password" value="m"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource ="com/management/product/model/dao/ProductDAO.xml"/>
+    </mappers>
 
 </configuration>
