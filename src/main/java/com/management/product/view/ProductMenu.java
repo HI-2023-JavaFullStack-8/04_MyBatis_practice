@@ -4,6 +4,7 @@ import com.common.SearchCondition;
 import com.management.product.controller.ProductController;
 import com.management.product.model.dto.ProductDTO;
 
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -41,7 +42,7 @@ public class ProductMenu {
         } while(true);
     }
 
-    private static SearchCondition inputSearchCondition() {
+    private SearchCondition inputSearchCondition() {
 
         Scanner sc = new Scanner(System.in);
         String searchOption = "";
@@ -81,10 +82,7 @@ public class ProductMenu {
             default : System.out.println("잘못된 번호입니다. 확인 후 다시 입력해 주세요."); break;
             }
 
-        SearchCondition searchCondition = new SearchCondition();
-        // 주석을 지우고 searchCondition 검색조건과 검색어를 searchCondition 객체에 setting 하세요.
-
-        return searchCondition;
+        return new SearchCondition(searchOption, searchValue);
     }
 
     private static ProductDTO inputNewProductInfo() {

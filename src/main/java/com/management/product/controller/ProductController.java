@@ -4,7 +4,9 @@ import com.common.SearchCondition;
 import com.management.product.model.dto.ProductDTO;
 import com.management.product.model.service.ProductService;
 import com.management.product.view.ProductPrint;
+import org.apache.ibatis.annotations.Mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,8 +42,10 @@ public class ProductController {
 
         List<ProductDTO> productList = productService.selectProductByCondition(searchCondition);
 
-        if (productList != null) {
-            productPrint.printProductList(productList, searchCondition);
+        System.out.println("null이니? " + productList == null);
+        System.out.println("empty니?" + productList.isEmpty());
+        if (productList.isEmpty() != true) {
+            productPrint.printProductList(productList,searchCondition);
         } else {
             productPrint.printErrorMessage("selectOne");
         }
@@ -56,6 +60,14 @@ public class ProductController {
     }
 
     public void registNewProduct(ProductDTO product) {
+
+        int productCode = product.getProductCode();
+
+        if(productService.registNewProduct(product)) {
+            productPrint.printSuccessMessage("insert");
+        } else {
+            productPrint.printErrorMessage("insert");
+        }
 
         // 4. 제품 정보를 등록하는 메소드
         //    (조건 1) 화면에서 releaseDate를 0000-00-00 형태로 받아옵니다.
@@ -84,6 +96,12 @@ public class ProductController {
         //    (조건 1) Service 객체를 호출하여 수정을 수행하고, 결과를 boolean 값으로 return 받으세요.
         //    (조건 2) delete가 정상적으로 수행된 경우, Print 객체를 통해 삭제 성공했다는 성공 메세지를 출력하세요.
         //    (조건 3) delete가 정상적으로 수행되지 않은 경우, Print 객체를 통해 삭제 실패했다는 오류 메세지를 출력하세요.
+
+        if (productService.deleteProduct(parameter)){
+            productPrint.printSuccessMessage("delete");
+        } else {
+            productPrint.printErrorMessage("delete");
+        }
 
     }
 }

@@ -55,6 +55,8 @@ public class ProductPrint {
         switch(errorCode) {
             case "selectList" : errorMessage = "메뉴 목록 조회를 실패하였습니다."; break;
             case "selectOne" : errorMessage = "메뉴 조회를 실패하였습니다."; break;
+            case "delete" : errorMessage = "메뉴 삭제를 실패하였습니다."; break;
+            case "insert" : errorMessage = "신규 메뉴 등록에 실패하였습니다."; break;
 
         }
         // 4. 에러메시지를 출력하는 메소드
