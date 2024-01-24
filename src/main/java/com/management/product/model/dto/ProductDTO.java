@@ -7,9 +7,9 @@ public class ProductDTO implements java.io.Serializable {
     // * 주석을 지우고 제품 정보를 담는 객체를 만들 java class를 작성하세요.
     // * 모든 필드는 String 타입으로 작성하시고, ProductDTO productCompany DB의 'PRODUCT_INFO' 테이블과 매핑 가능해야 합니다.
     // * DTO 객체에 대하여 기본적으로 작성해야 하는 사항 5가지 항목을 반드시 작성하세요.
-    private int code;
-    private String name;
-    private String cost;
+    private int productCode;
+    private String productName;
+    private String originCost;
     private String releaseDate;
     private String discountRate;
     private String salesQuantity;
@@ -20,10 +20,10 @@ public class ProductDTO implements java.io.Serializable {
     public ProductDTO() {
     }
 
-    public ProductDTO(int code, String name, String cost, String releaseDate, String discountRate, String salesQuantity, String stockQuantity, String categoryCode, String productionStatus) {
-        this.code = code;
-        this.name = name;
-        this.cost = cost;
+    public ProductDTO(int productCode, String productName, String originCost, String releaseDate, String discountRate, String salesQuantity, String stockQuantity, String categoryCode, String productionStatus) {
+        this.productCode = productCode;
+        this.productName = productName;
+        this.originCost = originCost;
         this.releaseDate = releaseDate;
         this.discountRate = discountRate;
         this.salesQuantity = salesQuantity;
@@ -32,28 +32,28 @@ public class ProductDTO implements java.io.Serializable {
         this.productionStatus = productionStatus;
     }
 
-    public int getCode() {
-        return code;
+    public int getProductCode() {
+        return productCode;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setProductCode(int productCode) {
+        this.productCode = productCode;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getCost() {
-        return cost;
+    public String getOriginCost() {
+        return originCost;
     }
 
-    public void setCost(String cost) {
-        this.cost = cost;
+    public void setOriginCost(String originCost) {
+        this.originCost = originCost;
     }
 
     public String getReleaseDate() {
@@ -107,9 +107,9 @@ public class ProductDTO implements java.io.Serializable {
     @Override
     public String toString() {
         return "ProductDTO{" +
-                "code=" + code +
-                ", name='" + name + '\'' +
-                ", cost='" + cost + '\'' +
+                "productCode=" + productCode +
+                ", productName='" + productName + '\'' +
+                ", originCost='" + originCost + '\'' +
                 ", releaseDate='" + releaseDate + '\'' +
                 ", discountRate='" + discountRate + '\'' +
                 ", salesQuantity='" + salesQuantity + '\'' +

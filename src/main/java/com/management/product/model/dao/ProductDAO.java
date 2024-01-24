@@ -6,6 +6,7 @@ import com.management.product.model.dto.ProductDTO;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public interface ProductDAO {
 
@@ -15,11 +16,10 @@ public interface ProductDAO {
 
     List<ProductDTO> selectProductByCondition(SearchCondition searchCondition);
 
-    boolean registNewProduct(ProductDTO product);
+    int insertProduct(ProductDTO product);
 
-    boolean modifyProductInfo(ProductDTO product);
+    int updateProduct(ProductDTO product);
 
     boolean deleteProduct(Map<String, String> parameter);
-
 
 }
