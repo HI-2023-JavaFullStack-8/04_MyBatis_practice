@@ -26,13 +26,10 @@ public class CategoryService {
 
         List<CategoryDTO> categoryList = categoryDAO.selectCategoryList(parameter);
         sqlSession.close();
-        System.out.println(categoryList.isEmpty());
 
-        System.out.println(categoryList != null);
 
         if (categoryList != null && !categoryList.isEmpty()) {
             for (CategoryDTO category : categoryList) {
-                System.out.println(category);
             }
         } else {
             System.out.println("검색 결과가 존재하지 않습니다.");

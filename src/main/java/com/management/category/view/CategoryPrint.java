@@ -15,7 +15,7 @@ public class CategoryPrint {
         // 1. 조회한 목록 출력하는 메소드
         //    (조건 1) HashMap 타입의 매개변수로 받아온 값을 기준으로 전체 목록 조회인지, 순위별 제품분류 조회인지 구분하여 출력하세요.
         //    (조건 2) List<CategoryDTO>로 받아온 데이터 목록을 전체 출력하세요.
-        System.out.println(parameter);
+
 
         for (CategoryDTO categoryDTO : categoryList) {
             System.out.println(categoryDTO);
