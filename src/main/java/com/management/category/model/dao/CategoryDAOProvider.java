@@ -22,71 +22,46 @@ public class CategoryDAOProvider {
         String option = parameter.get("option");
         SQL sql = new SQL();
 
-//        return new SQL(option) {
-//            {
-//                if (option.equals(parameter.get("allList"))) {
-//
-//                             SELECT("CATEGORY_CODE")
-//                            .FROM("PRODUCT_CATEGORY");
-//
-//                }
-//                if (option.equals(parameter.get("orderList"))) {
-//
-//                             SELECT("COUNT(B.CATEGORY_CODE) AS CA")
-//                            .FROM("PRODUCT_CATEGORY A")
-//                            .RIGHT_OUTER_JOIN("PRODUCT_INFO B ON (A.CATEGORY_CDE = B.CATEGORY_CODE")
-//                            .GROUP_BY("B.CATEGORY_CODE")
-//                            .ORDER_BY("CA DESC");
-//                }
-//                System.out.println("sql 뭐임?" + this);
-//            }
-//
-//        }.toString();
-
-
-        if (option.equals(parameter.get("allList"))) {
+        if ("allList".equals(option)) {
             sql
-                    .SELECT("CATEGORY_CODE")
+                    .SELECT("CATEGORY_CODE", "CATEGORY_NAME")
                     .FROM("PRODUCT_CATEGORY");
 
-        }
-//        if (option.equals(parameter.get("orderList"))) {
-          else {
+        } else {
             sql
-                    .SELECT("COUNT(B.CATEGORY_CODE) AS CATEGORY_CODE","A.CATEGORY_NAME")
+                    .SELECT("COUNT(B.CATEGORY_CODE) AS CATEGORY_CODE", "A.CATEGORY_NAME")
                     .FROM("PRODUCT_CATEGORY A")
                     .RIGHT_OUTER_JOIN("PRODUCT_INFO B ON (A.CATEGORY_CODE = B.CATEGORY_CODE)")
                     .GROUP_BY("B.CATEGORY_CODE")
                     .ORDER_BY("CATEGORY_CODE DESC");
 
         }
-        System.out.println(sql.toString());
+
         return sql.toString();
+    }
 
+        public String insertCategory (CategoryDTO category){
 
-//    }
+            // 2. Provider를 활용하여 제품분류를 등록하는 코드를 작성하세요.
+            //    아래 작성된 return null은 과제 툴 오류를 제거하고자 임의 작성하였으니 지우고 로직을 작성하세요.
+            return null;
 
-//        public String insertCategory (CategoryDTO category){
-//
-//            // 2. Provider를 활용하여 제품분류를 등록하는 코드를 작성하세요.
-//            //    아래 작성된 return null은 과제 툴 오류를 제거하고자 임의 작성하였으니 지우고 로직을 작성하세요.
-//            return null;
-//
-//        }
-//
-//        public String updateCategory (CategoryDTO category){
-//
-//            // 3. Provider를 활용하여 제품분류명을 수정하는 코드를 작성하세요.
-//            //    아래 작성된 return null은 과제 툴 오류를 제거하고자 임의 작성하였으니 지우고 로직을 작성하세요.
-//            return null;
-//
-//        }
-//
-//        public String deleteCategory (Map < String, String > parameter){
-//
-//            // 4. Provider를 활용하여 제품분류를 삭제하는 코드를 작성하세요.
-//            //    아래 작성된 return null은 과제 툴 오류를 제거하고자 임의 작성하였으니 지우고 로직을 작성하세요.
-//            return null;
+        }
+
+        public String updateCategory (CategoryDTO category){
+
+            // 3. Provider를 활용하여 제품분류명을 수정하는 코드를 작성하세요.
+            //    아래 작성된 return null은 과제 툴 오류를 제거하고자 임의 작성하였으니 지우고 로직을 작성하세요.
+            return null;
+
+        }
+
+        public String deleteCategory (Map < String, String > parameter){
+
+            // 4. Provider를 활용하여 제품분류를 삭제하는 코드를 작성하세요.
+            //    아래 작성된 return null은 과제 툴 오류를 제거하고자 임의 작성하였으니 지우고 로직을 작성하세요.
+            return null;
+
 
     }
 }
