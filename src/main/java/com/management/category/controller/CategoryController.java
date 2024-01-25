@@ -1,7 +1,13 @@
 package com.management.category.controller;
 
 import com.management.category.model.dto.CategoryDTO;
+import com.management.category.model.service.CategoryService;
+import com.management.category.view.CategoryPrint;
+import com.management.product.model.service.ProductService;
+import com.management.product.view.ProductPrint;
+import jdk.jfr.Category;
 
+import java.util.List;
 import java.util.Map;
 
 public class CategoryController {
@@ -10,12 +16,28 @@ public class CategoryController {
 
     // 1. 자주 사용할 Service와 Print 객체를 선언하고, Controller 객체 생성 시 생성되도록 작성하세요.
 
+    private final CategoryService categoryService;
+    private final CategoryPrint categoryPrint;
+
+    public CategoryController () {
+
+        categoryService = new CategoryService();
+        categoryPrint = new CategoryPrint();
+    }
+
+
     public void selectCategoryList(Map<String, String> parameter) {
 
         // 2. 제품분류 목록을 조회하는 메소드
         //    (조건 1) Service 객체를 호출하여 조건에 따라 List<CategoryDTO> 타입으로 제품분류 목록을 조회하세요.
         //    (조건 2) 목록이 비어있지 않은 경우, Print 객체를 통해 제품분류 목록을 출력하세요.
         //    (조건 3) 제품분류 목록이 없는 경우, Print 객체를 통해 조회 결과가 없다는 오류 메세지를 출력하세요.
+        List<CategoryDTO> categoryList = categoryService.selectCategoryList(parameter);
+        if (categoryList != null) {
+            categoryPrint.printTeamList(categoryList, parameter);
+        } else {
+            categoryPrint.printErrorMessage("selectList");
+        }
 
     }
 
@@ -25,6 +47,12 @@ public class CategoryController {
         //    (조건 1) Service 객체를 호출하여 등록을 수행하고, 결과를 boolean 값으로 return 받으세요.
         //    (조건 2) insert가 정상적으로 수행된 경우, Print 객체를 통해 등록 성공했다는 성공 메세지를 출력하세요.
         //    (조건 3) insert가 정상적으로 수행되지 않은 경우, Print 객체를 통해 등록 실패했다는 오류 메세지를 출력하세요.
+
+        if (categoryService.registNewCategory(category)) {
+            categoryPrint.printSuccessMessage("insert");
+        } else {
+            categoryPrint.printErrorMessage("insert");
+        }
 
     }
 

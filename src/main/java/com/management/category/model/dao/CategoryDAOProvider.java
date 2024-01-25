@@ -1,8 +1,11 @@
 package com.management.category.model.dao;
 
 import com.management.category.model.dto.CategoryDTO;
+import org.apache.ibatis.jdbc.SQL;
 
 import java.util.Map;
+
+import static org.apache.ibatis.jdbc.SqlBuilder.SELECT;
 
 public class CategoryDAOProvider {
 
@@ -16,8 +19,28 @@ public class CategoryDAOProvider {
         //          예를 들어, PRODUCT_INFO 테이블에 제품분류가 A인 제품이 10개, B인 제품이 4개, C인 제품이 13개 있다면
         //          제품분류 순위는 C > A > B 입니다. (단, 제품 갯수가 0개인 제품분류는 목록에 출력되지 않아도 됩니다.)
         //    아래 작성된 return null은 과제 툴 오류를 제거하고자 임의 작성하였으니 지우고 로직을 작성하세요.
-        return null;
+        String option = parameter.get("option");
 
+        SQL sql = new SQL();
+
+
+        if(option.equals(parameter.get("allList"))) {
+            sql
+                    .SELECT("CATEGORY_CODE")
+                    .FROM("PRODUCT_CATEGORY");
+
+        }
+        if(option.equals(parameter.get("orderList"))) {
+            sql
+                    .SELECT("COUNT(B.CATEGORY_CODE) AS CA")
+                    .FROM( "PRODUCT_CATEGORY A")
+                    .RIGHT_OUTER_JOIN("PRODUCT_INFO B ON (A.CATEGORY_CDE = B.CATEGORY_CODE")
+                    .GROUP_BY("B.CATEGORY_CODE")
+                    .ORDER_BY("CA DESC");
+
+        }
+
+        return sql.toString();
     }
 
     public String insertCategory(CategoryDTO category) {

@@ -50,6 +50,7 @@
             <if test="searchOption == 'productName'">
                 AND PRODUCT_NAME LIKE CONCAT('%', #{searchValue}, '%')
             </if>
+
             <choose>
                 <when test="searchValue == '백화점'">
                     AND DISCOUNT_RATE = '0'
@@ -58,12 +59,15 @@
                    AND DISCOUNT_RATE >= '1'
                </when>
             </choose>
+
             <if test="searchOption == 'newProduct'">
                 AND RELEASE_DATE LIKE CONCAT(DATE_FORMAT(NOW(), '%Y%m'), '%')
             </if>
+
             <if test="searchOption == 'nonProduction'">
                 AND PRODUCTION_STATUS = 'N'
             </if>
+
             ORDER BY PRODUCT_CODE
 
 

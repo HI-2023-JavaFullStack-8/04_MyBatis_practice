@@ -1,22 +1,42 @@
 package com.management.category.model.service;
 
+import com.management.category.model.dao.CategoryDAO;
 import com.management.category.model.dto.CategoryDTO;
+import org.apache.ibatis.session.SqlSession;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.common.Template.getSqlSession;
 
 public class CategoryService {
 
     // * 주석을 지우고 Service 역할에 해당하는 메소드를 작성하세요.
 
     // 1. 자주 사용할 DAO 객체를 선언하세요.
+    private CategoryDAO categoryDAO;
 
     public List<CategoryDTO> selectCategoryList(Map<String, String> parameter) {
 
         // 2. 제품분류 목록을 조회하는 로직을 작성하세요.
         // 　　아래 작성된 return null은 과제 툴 오류를 제거하고자 임의 작성하였으니 지우고 로직을 작성하세요.
-        return null;
+        SqlSession sqlSession = getSqlSession();
+        categoryDAO =sqlSession.getMapper(CategoryDAO.class);
 
+        List<CategoryDTO> categoryList = categoryDAO.selectCategoryList(parameter);
+        sqlSession.close();
+        System.out.println(categoryList.isEmpty());
+
+        System.out.println(categoryList != null);
+
+        if (categoryList != null && !categoryList.isEmpty()) {
+            for (CategoryDTO category : categoryList) {
+                System.out.println(category);
+            }
+        } else {
+            System.out.println("검색 결과가 존재하지 않습니다.");
+        } return  categoryList;
     }
 
     public boolean registNewCategory(CategoryDTO category) {

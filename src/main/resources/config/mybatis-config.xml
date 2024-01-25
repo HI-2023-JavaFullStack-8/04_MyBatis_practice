@@ -21,6 +21,7 @@
 
     <mappers>
         <mapper resource ="com/management/product/model/dao/ProductDAO.xml"/>
+        <package name="com.management.category.model.dao"/>
     </mappers>
 
 </configuration>
