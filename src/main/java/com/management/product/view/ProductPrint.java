@@ -3,6 +3,7 @@ package com.management.product.view;
 import com.common.SearchCondition;
 import com.management.product.model.dto.ProductDTO;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
 public class ProductPrint {
@@ -14,7 +15,11 @@ public class ProductPrint {
 
         // 1. 전체 조회한 목록 출력하는 메소드
         //    (조건) List<ProductDTO>로 받아온 데이터 목록을 전체 출력하세요.
+        System.out.println("=========== 조회한 메뉴 리스트 ============");
 
+        for(ProductDTO product : allProductList) {
+            System.out.println(product);
+        }
     }
 
     public void printProductList(List<ProductDTO> productList, SearchCondition searchCondition) {
