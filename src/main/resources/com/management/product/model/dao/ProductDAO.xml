@@ -3,12 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- * 주석을 지우고 각각 알맞은 태그를 활용하여 내용을 작성하세요. -->
-
-<!-- 1. namesapce 설정을 알맞게 지정하세요. -->
 <mapper namespace="com.management.product.model.dao.ProductDAO">
 
-    <!-- 2. ProductDTO type의 resultMap을 설정하세요. -->
     <resultMap id="productResultMap" type="com.management.product.model.dto.ProductDTO">
         <id property="productCode" column="product_code"/>
         <result property="productName" column="product_name"/>
@@ -35,11 +31,6 @@
          WHERE production_status = 'Y'
     </select>
 
-           <!-- (참고 1) 제품명 조회인 경우, 검색어를 '포함'한 모든 제품을 조회합니다.
-                     (예시) '솔' 검색 -> 솔방울, 칫솔 등 '솔' 포함 제품 모두 조회
-            (참고 2) 판매점 유형별 조회의 경우,
-                     '백화점'이면 할인율이 0%인 제품, '아울렛'이면 할인율이 1% 이상인 제품을 조회합니다.
-            (참고 3) 이달의 신상품 조희의 경우, 출시일이 이번 달인 제품(예를 들어, 현재 기준이면 2023년 5월 출시 제품)울 조회합니다. -->
     <select id="selectProductByCondition" parameterType="SearchCondition" resultMap="productResultMap">
         SELECT product_code
              ,product_name
@@ -110,18 +101,34 @@
                )
     </insert>
 
-    <!-- 6. 사용자가 수정을 원하는 데이터만 수정하도록 Dynamic Query를 활용한 쿼리를 작성하세요.
-            (쿼리id) updateProduct -->
     <update id="updateProduct" parameterType="com.management.product.model.dto.ProductDTO">
         UPDATE product_info
-           SET product_name = #{ productName }
-             ,origin_cost = #{ originCost }
-             ,release_date = #{ releaseDate }
-             ,discount_rate = #{discountRate }
-             ,sales_quantity = #{ salesQuantity }
-             ,stock_quantity = #{ stockQuantity }
-             ,category_code = #{ categoryCode }
-             ,production_status = #{ productionStatus }
+        <trim prefix="SET" prefixOverrides=",">
+            <if test="productName != null and productName != ''">
+                product_name = #{ productName }
+            </if>
+            <if test="originCost != null and originCost != ''">
+                ,origin_cost = #{ originCost }
+            </if>
+            <if test="releaseDate != null and releaseDate != ''">
+                ,release_date = #{ releaseDate }
+            </if>
+            <if test="discountRate != null and discountRate != ''">
+                ,discount_rate = #{ discountRate }
+            </if>
+            <if test="salesQuantity != null and salesQuantity != ''">
+                ,sales_quantity = #{ salesQuantity }
+            </if>
+            <if test="stockQuantity != null and stockQuantity != ''">
+                ,stock_quantity = #{ stockQuantity }
+            </if>
+            <if test="categoryCode != null and categoryCode != ''">
+                ,category_code = #{ categoryCode }
+            </if>
+            <if test="productionStatus != null and productionStatus != ''">
+                ,production_status = #{ productionStatus }
+            </if>
+        </trim>
         WHERE product_code = #{ productCode }
     </update>
 
