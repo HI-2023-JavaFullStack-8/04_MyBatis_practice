@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
-
-    <!-- 주석을 지우고 mybatis 설정 파일 내용을 작성하세요. -->
-
+    <environments default="dev">
+        <environment id="dev">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost/productcompany"/>
+                <property name="username" value="ohgiraffers"/>
+                <property name="password" value="ohgiraffers"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <package name="com/management/product/model/dao"/>
+        <package name="com/management/category/model/dao"/>
+    </mappers>
 </configuration>

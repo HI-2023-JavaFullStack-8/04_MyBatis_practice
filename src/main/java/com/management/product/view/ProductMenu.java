@@ -82,7 +82,8 @@ public class ProductMenu {
             }
 
         SearchCondition searchCondition = new SearchCondition();
-        // 주석을 지우고 searchCondition 검색조건과 검색어를 searchCondition 객체에 setting 하세요.
+        searchCondition.setOption(searchOption);
+        searchCondition.setValue(searchValue);
 
         return searchCondition;
     }
@@ -95,6 +96,7 @@ public class ProductMenu {
         System.out.println("===================================");
         ProductDTO productDTO = new ProductDTO();
         getProductInfo(productDTO);
+
         System.out.println("===================================");
 
         return productDTO;
@@ -111,7 +113,7 @@ public class ProductMenu {
         String productCode = sc.nextLine();
 
         ProductDTO productDTO = new ProductDTO();
-        // 주석을 지우고 받아온 제품 코드를 productDTO 객체에 setting 하세요.
+        productDTO.setProduct_code(productCode);
 
         getProductInfo(productDTO);
 
@@ -120,7 +122,8 @@ public class ProductMenu {
         System.out.println("제품의 생산여부를 입력해 주세요(Y:생산중 / H:생산보류 / N:생산중단) : ");
         String productionStatus = sc.nextLine().toUpperCase();
 
-        // 주석을 지우고 받아온 활동 상태를 productDTO 객체에 setting 하세요.
+        productDTO.setSales_quantity(salesQuantity);
+        productDTO.setProduction_status(productionStatus);
 
         System.out.println("===================================");
 
@@ -143,7 +146,12 @@ public class ProductMenu {
         System.out.println("제품의 할인율을 입력해 주세요 : ");
         String discountRate  = sc.nextLine();
 
-        // 주석을 지우고 받아온 정보들을 productDTO 객체에 setting 하세요.
+         productDTO.setProduct_name(productName);
+        productDTO.setCategory_code(categoryCode);
+        productDTO.setOrigin_cost(originCost);
+        productDTO.setRelease_date(releaseDate);
+        productDTO.setStock_quantity(stockQuantity);
+        productDTO.setDiscount_rate(discountRate);
 
         return productDTO;
     }
