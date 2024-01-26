@@ -23,7 +23,7 @@ public class CategoryPrint {
         String successMessage = "";
 
         switch(successCode) {
-            case "registNewCategory" : successMessage = "새로운 분류 코드 생성을 실패하였습니다."; break;
+            case "registNewCategory" : successMessage = "새로운 분류 코드 생성을 성공하였습니다."; break;
             case "modifyCategoryName" : successMessage = "제품분류 정보 수정을 성공했습니다."; break;
             case "deleteCategory" : successMessage = "제품분류 삭제를 성공했습니다."; break;
         }
