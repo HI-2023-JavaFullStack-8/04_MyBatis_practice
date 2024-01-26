@@ -1,10 +1,7 @@
 package com.management.category.model.dao;
 
 import com.management.category.model.dto.CategoryDTO;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
@@ -23,10 +20,13 @@ public interface CategoryDAO {
     @SelectProvider(type= CategoryDAOProvider.class, method = "selectCategoryList")
     List<CategoryDTO> selectCategoryList(Map<String, String> parameter);
 
-    public String insertCategory(CategoryDTO category) ;
+    @InsertProvider(type = CategoryDAOProvider.class, method = "insertCategory")
+    public boolean insertCategory(CategoryDTO category) ;
 
-    public String updateCategory(CategoryDTO category);
+    @UpdateProvider(type = CategoryDAOProvider.class, method = "updateCategory")
+    public boolean updateCategory(CategoryDTO category);
 
-    public String deleteCategory(Map<String, String> parameter);
+    @DeleteProvider(type = CategoryDAOProvider.class, method = "deleteCategory")
+    public boolean deleteCategory(Map<String, String> parameter);
 
 }
