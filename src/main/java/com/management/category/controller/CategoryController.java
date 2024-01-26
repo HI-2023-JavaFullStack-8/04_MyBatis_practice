@@ -34,9 +34,8 @@ public class CategoryController {
     public void registNewCategory(CategoryDTO category) {
 
          boolean result = categoryService.registNewCategory(category);
-        System.out.println("카테고리 등록 성공했니 ? " + result);
+
          if(result == true){
-            System.out.println("카테고리 등록 성공했어!");
             categoryPrint.printSuccessMessage("registCategory");
         }
          else

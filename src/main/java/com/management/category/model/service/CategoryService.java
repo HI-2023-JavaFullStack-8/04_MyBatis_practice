@@ -41,7 +41,6 @@ public class CategoryService {
         }
         sqlSession.close();
 
-        System.out.println("Service : 카테고리 등록 성공 여부 : " + result);
         return result > 0 ? true : false;
 
     }

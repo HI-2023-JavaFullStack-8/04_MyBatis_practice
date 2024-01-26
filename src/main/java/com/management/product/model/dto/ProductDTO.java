@@ -103,8 +103,7 @@ public class ProductDTO implements  java.io.Serializable{
 
     @Override
     public String toString() {
-        return "ProductDTO{" +
-                "product_code='" + product_code + '\'' +
+        return  "product_code='" + product_code + '\'' +
                 ", product_name='" + product_name + '\'' +
                 ", origin_cost='" + origin_cost + '\'' +
                 ", release_date='" + release_date + '\'' +
@@ -112,8 +111,7 @@ public class ProductDTO implements  java.io.Serializable{
                 ", sales_quantity='" + sales_quantity + '\'' +
                 ", stock_quantity='" + stock_quantity + '\'' +
                 ", category_code='" + category_code + '\'' +
-                ", production_status='" + production_status + '\'' +
-                '}';
+                ", production_status='" + production_status + '\'' ;
     }
 
 }

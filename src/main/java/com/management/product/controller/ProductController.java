@@ -69,13 +69,18 @@ public class ProductController {
 
     public void modifyProductInfo(ProductDTO product) {
 
-        String[] date = product.getRelease_date().split("-");
+        if(!product.getRelease_date().toUpperCase().equals("SKIP"))
+        {
+            String[] date = product.getRelease_date().split("-");
 
-        String year = date[0];
-        String month = date[1];
-        String day = date[2];
-        String ReleaseDate = "" + year + month + day;
-        product.setRelease_date(ReleaseDate);
+            String year = date[0];
+            String month = date[1];
+            String day = date[2];
+            String ReleaseDate = "" + year + month + day;
+
+            product.setRelease_date(ReleaseDate);
+        }
+
         boolean result = productService.modifyProductInfo(product);
         if(result == true){
             productPrint.printSuccessMessage("modifyProduct");

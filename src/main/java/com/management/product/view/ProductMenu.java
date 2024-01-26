@@ -153,7 +153,6 @@ public class ProductMenu {
         productDTO.setStock_quantity(stockQuantity);
         productDTO.setDiscount_rate(discountRate);
 
-        System.out.println("신제품 이름 : " + productDTO.getProduct_name());
         return productDTO;
     }
 

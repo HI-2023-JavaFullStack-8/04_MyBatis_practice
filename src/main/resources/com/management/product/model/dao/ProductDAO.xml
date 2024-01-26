@@ -94,14 +94,32 @@
 
     <update id="updateProduct" parameterType="com.management.product.model.dto.ProductDTO">
         UPDATE product_info
-        SET PRODUCT_NAME = #{ product_name }
-            , ORIGIN_COST = #{ origin_cost }
-            , RELEASE_DATE = #{ release_date }
-            , DISCOUNT_RATE = #{ discount_rate }
-            , SALES_QUANTITY = #{ sales_quantity }
-            , STOCK_QUANTITY = #{ stock_quantity }
-            , CATEGORY_CODE = #{ category_code }
-            , PRODUCTION_STATUS = #{ production_status }
+        <trim prefix="SET" prefixOverrides=",">
+            <if test="product_name != null and product_name != '' and product_name.toUpperCase() != 'SKIP'">
+                SET PRODUCT_NAME = #{ product_name }
+            </if>
+            <if test="origin_cost != null and origin_cost.toUpperCase() != 'SKIP'">
+                , ORIGIN_COST = #{ origin_cost }
+            </if>
+            <if test="release_date != null and release_date != '' and release_date.toUpperCase() != 'SKIP'">
+                , RELEASE_DATE = #{ release_date }
+            </if>
+            <if test="discount_rate != null and discount_rate.toUpperCase() != 'SKIP'">
+                , DISCOUNT_RATE = #{ discount_rate }
+            </if>
+            <if test="sales_quantity != null and sales_quantity.toUpperCase() != 'SKIP'" >
+                , SALES_QUANTITY = #{ sales_quantity }
+            </if>
+            <if test="stock_quantity != null and stock_quantity.toUpperCase() != 'SKIP'">
+                , STOCK_QUANTITY = #{ stock_quantity }
+            </if>
+            <if test="category_code != null and category_code != '' and category_code.toUpperCase() != 'SKIP'">
+                , CATEGORY_CODE = #{ category_code }
+            </if>
+            <if test="production_status != null and production_status != '' and production_status.toUpperCase() != 'SKIP'">
+                , PRODUCTION_STATUS = #{ production_status }
+            </if>
+        </trim>
         WHERE PRODUCT_CODE = #{ product_code }
     </update>
 

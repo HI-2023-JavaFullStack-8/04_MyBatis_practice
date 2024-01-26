@@ -13,7 +13,6 @@ public class ProductPrint {
 
         for(ProductDTO product : allProductList){
             System.out.println(product);
-            System.out.println();
         }
     }
 
