@@ -28,10 +28,6 @@ public class Application {
                 case 9 : System.out.println("프로그램을 종료합니다."); return;
                 default : System.out.println("잘못된 번호입니다. 다시 입력해 주세요."); break;
             }
-
         } while(true);
-
     }
-
-
 }
