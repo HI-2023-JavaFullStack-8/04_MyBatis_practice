@@ -24,7 +24,7 @@ public class CategoryMenu {
             System.out.println("5. 판매부진 제품군 삭제");
             System.out.println("9. 이전 메뉴로 이동");
             System.out.println("===================================");
-            System.out.println("원하는 메뉴의 번호를 입력해 주세요 : ");
+            System.out.print("원하는 메뉴의 번호를 입력해 주세요 : ");
             int selectMenu = sc.nextInt();
 
             switch (selectMenu) {
@@ -59,11 +59,11 @@ public class CategoryMenu {
         System.out.println("신설할 제품분류 정보를 입력하세요.");
         System.out.println("===================================");
 
-        System.out.println("제품분류명을 입력해 주세요 : ");
+        System.out.print("제품분류명을 입력해 주세요 : ");
         String categoryName = sc.nextLine();
 
         CategoryDTO categoryDTO = new CategoryDTO();
-        // 주석을 지우고 받아온 정보를 categoryDTO 객체에 setting 하세요.
+        categoryDTO.setCategoryName(categoryName);
 
         return categoryDTO;
     }
@@ -79,7 +79,8 @@ public class CategoryMenu {
         System.out.println("===================================");
 
         CategoryDTO categoryDTO = new CategoryDTO();
-        // 주석을 지우고 받아온 정보를 categoryDTO 객체에 setting 하세요.
+        categoryDTO.setCategoryCode(categoryCode);
+        categoryDTO.setCategoryName(categoryName);
 
         return categoryDTO;
     }
@@ -96,7 +97,5 @@ public class CategoryMenu {
         parameter.put("categoryCode", categoryCode);
 
         return parameter;
-
     }
-
 }

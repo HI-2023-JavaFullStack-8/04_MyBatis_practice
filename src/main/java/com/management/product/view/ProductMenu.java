@@ -25,7 +25,7 @@ public class ProductMenu {
             System.out.println("5. 판매부진 단종 제품 삭제");
             System.out.println("9. 이전 메뉴로 이동");
             System.out.println("===================================");
-            System.out.println("원하는 관리 메뉴의 번호를 입력해 주세요 : ");
+            System.out.print("원하는 관리 메뉴의 번호를 입력해 주세요 : ");
             int selectMenu = sc.nextInt();
 
             switch (selectMenu) {
@@ -55,20 +55,20 @@ public class ProductMenu {
         System.out.println("3. 이달의 신재품 조회");
         System.out.println("4. 생산 중단 제품 조회");
         System.out.println("===================================");
-        System.out.println("원하는 조건의 번호를 입력해 주세요 : ");
+        System.out.print("원하는 조건의 번호를 입력해 주세요 : ");
         int selectMenu = sc.nextInt();
 
         switch (selectMenu) {
             case 1 :
                 sc.nextLine();
                 searchOption = "productName";
-                System.out.println("조회할 제품명을 입력해 주세요 : ");
+                System.out.print("조회할 제품명을 입력해 주세요 : ");
                 searchValue = sc.nextLine();
                 break;
             case 2 :
                 sc.nextLine();
                 searchOption = "salesStore";
-                System.out.println("판매점 유형을 입력해 주세요(백화점 or 아울렛) : ");
+                System.out.print("판매점 유형을 입력해 주세요(백화점 or 아울렛) : ");
                 searchValue = sc.nextLine();
                 break;
             case 3 :
@@ -82,7 +82,8 @@ public class ProductMenu {
             }
 
         SearchCondition searchCondition = new SearchCondition();
-        // 주석을 지우고 searchCondition 검색조건과 검색어를 searchCondition 객체에 setting 하세요.
+        searchCondition.setOption(searchOption);
+        searchCondition.setValue(searchValue);
 
         return searchCondition;
     }
@@ -91,7 +92,7 @@ public class ProductMenu {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("===================================");
-        System.out.println("등록할 새로운 제품 정보를 입력하세요. ");
+        System.out.print("등록할 새로운 제품 정보를 입력하세요. ");
         System.out.println("===================================");
         ProductDTO productDTO = new ProductDTO();
         getProductInfo(productDTO);
@@ -107,43 +108,86 @@ public class ProductMenu {
         System.out.println("수정할 제품 정보를 입력하세요. ");
         System.out.println("수정을 원하지 않는 정보는 SKIP을 입력하세요.");
         System.out.println("===================================");
-        System.out.println("수정 대상 제품코드를 입력해 주세요 : ");
+        System.out.print("수정 대상 제품코드를 입력해 주세요 : ");
         String productCode = sc.nextLine();
 
         ProductDTO productDTO = new ProductDTO();
-        // 주석을 지우고 받아온 제품 코드를 productDTO 객체에 setting 하세요.
+        productDTO.setProductCode(productCode);
 
         getProductInfo(productDTO);
 
-        System.out.println("제품의 판매량을 입력해 주세요 : ");
-        String salesQuantity  = sc.nextLine();
-        System.out.println("제품의 생산여부를 입력해 주세요(Y:생산중 / H:생산보류 / N:생산중단) : ");
-        String productionStatus = sc.nextLine().toUpperCase();
+        System.out.print("제품의 판매량을 입력해 주세요 : ");
+        String salesQuantity = sc.nextLine();
+        if (!salesQuantity.equalsIgnoreCase("SKIP")) {
+            productDTO.setSalesQuantity(salesQuantity);
+        } else {
+            productDTO.setSalesQuantity(productDTO.getSalesQuantity());
+        }
 
-        // 주석을 지우고 받아온 활동 상태를 productDTO 객체에 setting 하세요.
+        System.out.print("제품의 생산여부를 입력해 주세요(Y:생산중 / H:생산보류 / N:생산중단) : ");
+        String productionStatus = sc.nextLine().toUpperCase();
+        if (!productionStatus.equalsIgnoreCase("SKIP")) {
+            productDTO.setProductionStatus(productionStatus);
+        } else {
+            productDTO.setProductionStatus(productDTO.getProductionStatus());
+        }
 
         System.out.println("===================================");
-
+        System.out.println(productDTO);
         return productDTO;
     }
 
     private static ProductDTO getProductInfo(ProductDTO productDTO) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("제품명을 입력해 주세요 : ");
+        System.out.print("제품명을 입력해 주세요 : ");
         String productName = sc.nextLine();
-        System.out.println("제품의 분류코드를 입력해 주세요 : ");
+        System.out.print("제품의 분류코드를 입력해 주세요 : ");
         String categoryCode = sc.nextLine();
-        System.out.println("제품의 원가를 입력해 주세요 : ");
+        System.out.print("제품의 원가를 입력해 주세요 : ");
         String originCost = sc.nextLine();
-        System.out.println("제품의 출시일울 입력해 주세요(2000-01-01 형식) : ");
+        System.out.print("제품의 출시일울 입력해 주세요(2000-01-01 형식) : ");
         String releaseDate = sc.nextLine();
-        System.out.println("제품의 재고량을 입력해 주세요 : ");
+        System.out.print("제품의 재고량을 입력해 주세요 : ");
         String stockQuantity  = sc.nextLine();
-        System.out.println("제품의 할인율을 입력해 주세요 : ");
+        System.out.print("제품의 할인율을 입력해 주세요 : ");
         String discountRate  = sc.nextLine();
 
-        // 주석을 지우고 받아온 정보들을 productDTO 객체에 setting 하세요.
+        if (!productName.equalsIgnoreCase("SKIP")) {
+            productDTO.setProductName(productName);
+        } else {
+            productDTO.setProductName(productDTO.getProductName());
+        }
+
+        if (!categoryCode.equalsIgnoreCase("SKIP")) {
+            productDTO.setCategoryCode(categoryCode);
+        } else {
+            productDTO.setCategoryCode(productDTO.getCategoryCode());
+        }
+
+        if (!originCost.equalsIgnoreCase("SKIP")) {
+            productDTO.setOriginCost(originCost);
+        } else {
+            productDTO.setOriginCost(productDTO.getOriginCost());
+        }
+
+        if (!releaseDate.equalsIgnoreCase("SKIP")) {
+            productDTO.setReleaseDate(releaseDate);
+        } else {
+            productDTO.setReleaseDate(productDTO.getReleaseDate());
+        }
+
+        if (!stockQuantity.equalsIgnoreCase("SKIP")) {
+            productDTO.setStockQuantity(stockQuantity);
+        } else {
+            productDTO.setStockQuantity(productDTO.getStockQuantity());
+        }
+
+        if (!discountRate.equalsIgnoreCase("SKIP")) {
+            productDTO.setDiscountRate(discountRate);
+        } else {
+            productDTO.setDiscountRate(productDTO.getDiscountRate());
+        }
 
         return productDTO;
     }
@@ -152,7 +196,7 @@ public class ProductMenu {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("===================================");
-        System.out.println("삭제할 제품의 코드를 입력해 주세요 : ");
+        System.out.print("삭제할 제품의 코드를 입력해 주세요 : ");
         String productCode = sc.nextLine();
         System.out.println("===================================");
 

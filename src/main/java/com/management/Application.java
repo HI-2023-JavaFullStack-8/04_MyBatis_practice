@@ -17,7 +17,7 @@ public class Application {
             System.out.println("2. 제품 분류 정보 관리");
             System.out.println("9. 프로그램 종료");
             System.out.println("====================================");
-            System.out.println("원하는 관리 메뉴의 번호를 입력해 주세요 : ");
+            System.out.print("원하는 관리 메뉴의 번호를 입력해 주세요 : ");
 
             Scanner sc = new Scanner(System.in);
             int selectMenu = sc.nextInt();
@@ -30,8 +30,5 @@ public class Application {
             }
 
         } while(true);
-
     }
-
-
 }
