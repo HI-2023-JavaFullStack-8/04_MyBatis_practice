@@ -3,11 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
-    <!-- 주석을 지우고 mybatis 설정 파일 내용을 작성하세요. -->
     <properties resource="config/connection-info.properties"/>
 
     <typeAliases>
-        <typeAlias type="com.management.product.model.dto.ProductDTO" alias="ProductDTO"/>
+        <typeAlias type="com.common.SearchCondition" alias="SearchCondition"/>
     </typeAliases>
 
     <environments default="dev">
@@ -23,6 +22,8 @@
     </environments>
 
     <mappers>
-        <package name="com.management.product.model.dao.ProductDAO"/>
+        <package name="com/management/product/model/dao/ProductDAO.xml"/>
+        <package name="com/management/category/model/dao/CategoryDAO"/>
     </mappers>
+
 </configuration>
