@@ -2,7 +2,10 @@ package com.management.product.controller;
 
 import com.common.SearchCondition;
 import com.management.product.model.dto.ProductDTO;
+import com.management.product.model.service.ProductService;
+import com.management.product.view.ProductPrint;
 
+import java.util.List;
 import java.util.Map;
 
 public class ProductController {
@@ -11,8 +14,18 @@ public class ProductController {
 
     // 1. 자주 사용할 Service와 Print 객체를 선언하고, Controller 객체 생성 시 생성되도록 작성하세요.
 
+    ProductService productService = new ProductService();
+    ProductPrint productPrint = new ProductPrint();
+
     public void selectAllProductList() {
 
+        List<ProductDTO> productList = productService.selectAllProductList();
+
+        if(productList != null) {
+            productPrint.printAllProductList(productList);
+        } else {
+            productPrint.printErrorMessage("selectAllProductList");
+        }
         // 2. 전체 제품 목록을 조회하는 메소드
         //    (조건 1) Service 객체를 호출하여 List<ProductDTO> 타입으로 전체 제품 목록을 조회하세요.
         //    (조건 2) 제품 목록이 비어있지 않은 경우, Print 객체를 통해 제품 목록을 출력하세요.
@@ -21,6 +34,18 @@ public class ProductController {
     }
 
     public void selectProductByCondition(SearchCondition searchCondition) {
+
+        List<ProductDTO> productList = productService.selectProductByCondition(searchCondition);
+        System.out.println(searchCondition.toString());
+
+        if(productList != null) {
+            productPrint.printProductList(productList,searchCondition);
+        } else {
+            productPrint.printErrorMessage("selectProductByCondition");
+        }
+
+
+
 
         // 3. 조건에 따른 제품 목록을 조회하는 메소드
         //    (조건 1) Service 객체를 호출하여 List<ProductDTO> 타입으로 조건에 따른 제품 목록을 조회하세요.
@@ -31,6 +56,15 @@ public class ProductController {
     }
 
     public void registNewProduct(ProductDTO product) {
+
+
+        boolean result = productService.registNewProduct(product);
+
+        if(result = true){
+            productPrint.printSuccessMessage("registNewProduct");
+        }else{
+            productPrint.printErrorMessage("regisNewProduct");
+        }
 
         // 4. 제품 정보를 등록하는 메소드
         //    (조건 1) 화면에서 releaseDate를 0000-00-00 형태로 받아옵니다.
@@ -44,6 +78,13 @@ public class ProductController {
 
     public void modifyProductInfo(ProductDTO product) {
 
+        boolean result =productService.modifyProductInfo(product);
+
+        if(result = true){
+            productPrint.printSuccessMessage("update");
+        }else{
+            productPrint.printErrorMessage("update");
+        }
         // 5. 제품 정보를 수정하는 메소드
         //    (조건 1) 화면에서 releaseDate를 0000-00-00 형태로 받아옵니다.
         //            해당 필드에 매핑되는 DB 컬럼 releaseDate가 8byte이므로 '-' 문자를 제거하여 product객체에 setting 하세요.
@@ -55,6 +96,13 @@ public class ProductController {
 
     public void deleteProduct(Map<String, String> parameter) {
 
+        boolean result = productService.deleteProduct(parameter);
+
+        if(result = true){
+            productPrint.printSuccessMessage("delete");
+        }else{
+            productPrint.printErrorMessage("delete");
+        }
         // 6. 제품 정보를 삭제하는 메소드
         //    (조건 1) Service 객체를 호출하여 수정을 수행하고, 결과를 boolean 값으로 return 받으세요.
         //    (조건 2) delete가 정상적으로 수행된 경우, Print 객체를 통해 삭제 성공했다는 성공 메세지를 출력하세요.
