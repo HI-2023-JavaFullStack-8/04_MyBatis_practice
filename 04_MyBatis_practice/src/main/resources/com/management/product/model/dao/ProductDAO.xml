@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.management.product.model.dao.ProductDAO">
+    <resultMap id="productResultMap" type="com.management.product.model.dto.ProductDTO">
+        <id property="productCode" column="product_code"/>
+        <result property="productName" column="product_name"/>
+        <result property="originCost" column="origin_cost"/>
+        <result property="releaseDate" column="release_date"/>
+        <result property="discountRate" column="discount_rate"/>
+        <result property="salesQuantity" column="sales_quantity"/>
+        <result property="stockQuantity" column="stock_quantity"/>
+        <result property="categoryCode" column="category_code"/>
+        <result property="productionStatus" column="production_status"/>
+    </resultMap>
+
+
+    <select id="selectAllProductList" resultMap="productResultMap">
+        SELECT *
+            FROM product_info
+        WHERE orderable_status = 'Y';
+    </select>
+
+    <select id="selectProductByCondition" parameterType="SearchCondition" resultMap="productResultMap">
+        SELECT *
+            FROM product_info
+        <if test="searchOption == 'productName'">
+        WHERE product_name LIKE CONCAT('%', #{ searchValue }, '%')
+        </if>
+        <if test="searchOption == 'salesStore'">
+          <choose>
+          <when test="'selectValue == '백화점">
+              AND discount_rate = '0'
+          </when>
+          <when test="selectValue == '아울렛">
+              AND discount_rate >= '1'
+          </when>
+          </choose>
+        </if>
+        <if test="searchOption == 'newProduct'">
+        AND release_date LIKE CONCAT(DATE_FORMAT(NOW(), '%Y%m'), '%')
+        </if>
+        <if test="searchOption == 'nonProduction">
+            AND production_status = 'N'
+        </if>
+    </select>
+
+    <insert id="insertProduct" parameterType="com.management.product.model.dto.ProductDTO">
+        INSERT INTO product_info (
+                                  product_code
+                                    ,product_name
+                                    ,product_cost
+                                    ,release_date
+                                    ,discount_rate
+                                    ,sales_quantity
+                                    ,stock_quantity
+                                    ,category_code
+                                    ,production_status
+                                    )
+        VALUES (
+               #{ productCode }
+                , #{ productName }
+                , #{ originCost }
+                , #{ releaseDate }
+                , #{ discountRate }
+                , #{ salesQuantity }
+                , #{ stockQuantity }
+                , #{ categoryCode }
+                , #{ productionStatus }
+                 )
+    </insert>
+
+    <update id="updateCategory" parameterType="com.management.product.model.dto.ProductDTO">
+        UPDATE product_info
+        <trim prefix="SET" prefixOverrides=",">
+            <if test="productName != null and productName != ''">
+                ,product_name = #{ productName }
+            </if>
+            <if test="originCost != null and originCost != ''">
+                ,origin_cost = #{ originCost }
+            </if>
+
+            <if test="releaseDate != null and releaseDate != ''">
+                ,release_date = #{ releaseDate }
+            </if>
+
+            <if test="discountRate != null and discounRate != ''">
+                ,discountRate = #{ discountRate }
+            </if>
+
+            <if test="salesQunatity != null and salesQuantity != ''">
+                ,salesQuantity = #{ salesQuantity }
+            </if>
+
+            <if test="categoryCode != null and categoryCode != ''">
+                ,categoryCode = #{ categoryCode }
+            </if>
+
+            <if test="productionStatus != null and productionStatus != ''">
+                ,productionStatus = #{ productionStatus }
+            </if>
+        </trim>
+        WHERE product_code = #{ productCode }
+    </update>
+
+    <delete id="deleteProduct" parameterType="hashmap">
+        DELETE
+            FROM product_id
+        WHERE product_code = #{ productCode }
+    </delete>
+</mapper>
