@@ -2,10 +2,12 @@ package com.management.category.view;
 
 import com.management.category.controller.CategoryController;
 import com.management.category.model.dto.CategoryDTO;
+import com.management.category.model.service.CategoryService;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
 
 public class CategoryMenu {
 
@@ -48,7 +50,6 @@ public class CategoryMenu {
         } else {
             parameter.put("option", "allList");
         }
-
         return parameter;
     }
 
@@ -63,8 +64,7 @@ public class CategoryMenu {
         String categoryName = sc.nextLine();
 
         CategoryDTO categoryDTO = new CategoryDTO();
-        // 주석을 지우고 받아온 정보를 categoryDTO 객체에 setting 하세요.
-
+        categoryDTO.setCategoryName(categoryName);
         return categoryDTO;
     }
 
@@ -79,8 +79,7 @@ public class CategoryMenu {
         System.out.println("===================================");
 
         CategoryDTO categoryDTO = new CategoryDTO();
-        // 주석을 지우고 받아온 정보를 categoryDTO 객체에 setting 하세요.
-
+        categoryDTO.setCategoryName(categoryName);
         return categoryDTO;
     }
 
@@ -96,7 +95,6 @@ public class CategoryMenu {
         parameter.put("categoryCode", categoryCode);
 
         return parameter;
-
     }
 
 }
