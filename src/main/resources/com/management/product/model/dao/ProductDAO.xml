@@ -43,6 +43,9 @@
             <if test="searchOption == 'productName'">
                 PRODUCT_NAME LIKE CONCAT ('%', #{searchValue}, '%')
             </if>
+            <if test="searchOption == 'salesStore'">
+
+            </if>
         </where>
 
     </select>
