@@ -36,16 +36,19 @@ public class CategoryController {
 
     public void registNewCategory(CategoryDTO category) {
 
-        CategoryService categoryService = new CategoryService();
         categoryService.registNewCategory(category);
-        //    (조건 2) insert가 정상적으로 수행된 경우, Print 객체를 통해 등록 성공했다는 성공 메세지를 출력하세요.
-        //    (조건 3) insert가 정상적으로 수행되지 않은 경우, Print 객체를 통해 등록 실패했다는 오류 메세지를 출력하세요.
+
+        if(category != null) {
+            categoryPrint.printSuccessMessage("register");
+        } else {
+            categoryPrint.printErrorMessage("register");
+        }
 
     }
 
     public void modifyCategoryName(CategoryDTO category) {
 
-        // 4. 제품분류 정보를 수정하는 메소드
+        categoryService.modifyCategoryName(category);
         //    (조건 1) Service 객체를 호출하여 수정을 수행하고, 결과를 boolean 값으로 return 받으세요.
         //    (조건 2) update가 정상적으로 수행된 경우, Print 객체를 통해 수정 성공했다는 성공 메세지를 출력하세요.
         //    (조건 3) update가 정상적으로 수행되지 않은 경우, Print 객체를 통해 수정 실패했다는 오류 메세지를 출력하세요.

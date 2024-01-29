@@ -34,6 +34,12 @@ public class CategoryPrint {
 
         // 2. 성공메시지를 출력하는 메소드
         //    (조건) 성공코드를 전달받아 각각의 요청에 대해 성공을 알리는 메시지를 출력하세요.
+        String successMessage = "";
+
+        switch (successCode) {
+            case "register": successMessage = "카테고리 신설에 성공하였습니다."; break;
+        }
+        System.out.println(successMessage);
 
     }
 
@@ -45,6 +51,7 @@ public class CategoryPrint {
 
         switch (errorCode) {
             case "select" : errorMessage = "메뉴 조회에 실패했습니다."; break;
+            case "register" : errorMessage = "카테고리 신설에 실패했습니다."; break;
         }
 
         System.out.println(errorMessage);

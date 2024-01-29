@@ -79,6 +79,7 @@ public class CategoryMenu {
         System.out.println("===================================");
 
         CategoryDTO categoryDTO = new CategoryDTO();
+        categoryDTO.setCategoryCode(categoryCode);
         categoryDTO.setCategoryName(categoryName);
         return categoryDTO;
     }

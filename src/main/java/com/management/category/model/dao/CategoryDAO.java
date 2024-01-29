@@ -17,4 +17,8 @@ public interface CategoryDAO {
     @ResultMap("ResultMap")
     @InsertProvider(type = CategoryDAOProvider.class, method = "registNewProduct")
     int registNewProduct(CategoryDTO category);
+
+    @ResultMap("ResultMap")
+    @UpdateProvider(type = CategoryDAOProvider.class, method = "modifyCategoryName")
+    int modifyCategoryName(CategoryDTO category);
 }

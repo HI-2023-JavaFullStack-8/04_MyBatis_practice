@@ -15,7 +15,6 @@ public class CategoryService {
 
     public List<CategoryDTO> selectCategoryList(Map<String, String> parameter) {
 
-        // 2. 제품분류 목록을 조회하는 로직을 작성하세요.
         SqlSession sqlSession = getSqlSession();
 
         categoryDAO = sqlSession.getMapper(CategoryDAO.class);
@@ -45,6 +44,14 @@ public class CategoryService {
     public boolean modifyCategoryName(CategoryDTO category) {
 
         // 4. 제품분류명을 수정하는 로직을 작성하세요.
+
+        SqlSession sqlSession = getSqlSession();
+
+        categoryDAO = sqlSession.getMapper(CategoryDAO.class);
+        int result = categoryDAO.modifyCategoryName(category);
+
+
+
         // 　　아래 작성된 return false 과제 툴 오류를 제거하고자 임의 작성하였으니 지우고 로직을 작성하세요.
         return false;
 
