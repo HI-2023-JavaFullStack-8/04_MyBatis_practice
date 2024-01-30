@@ -4,7 +4,6 @@ import com.management.category.model.dto.CategoryDTO;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 
-import java.util.List;
 import java.util.Map;
 
 public class CategoryDAOProvider {
@@ -18,7 +17,7 @@ public class CategoryDAOProvider {
                  .FROM("PRODUCT_INFO p")
                  .JOIN("PRODUCT_CATEGORY c ON (CATEGORY_CODE c = CATEGORY_CODE p)")
              .GROUP_BY("c.CATEGORY_CODE")
-             .ORDER_BY("c.CATEGORY_CODE");
+             .ORDER_BY("c.CATEGORY_CODE DESC");
         }
         if("allList".equals(parameter.get("option"))) {
             sql.SELECT("p.PRODUCT_CODE","p.PRODUCT_NAME","p.ORIGIN_COST","p.RELEASE_DATE","p.DISCOUNT_RATE","p.SALES_QUANTITY","p.STOCK_QUANTITY", "p.CATEGORY_CODE", "p.PRODUCTION_STATUS")

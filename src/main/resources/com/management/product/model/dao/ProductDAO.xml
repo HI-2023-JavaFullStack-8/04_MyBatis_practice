@@ -44,17 +44,14 @@
                 PRODUCT_NAME LIKE CONCAT ('%', #{searchValue}, '%')
             </if>
             <if test="searchOption == 'salesStore'">
-                AND DISCOUNT_RATE = 0
-            </if>
-            <if test="searchOption == 'salesStore'">
-                AND DISCOUNT_RATE <= 1
+                <![CDATA[AND (DISCOUNT_RATE = 0 OR DISCOUNT_RATE <= 1)]]>
             </if>
             <if test="newProduct">
-                RELEASE_DATE BETWEEN 20240101 AND 20240131
+                AND RELEASE_DATE BETWEEN 20230501 AND 20230531
             </if>
         </where>
-
     </select>
+
 
     <insert id="insertNewProduct" parameterType="com.management.product.model.dto.ProductDTO">
         INSERT INTO PRODUCT_INFO

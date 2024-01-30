@@ -9,14 +9,8 @@ import java.util.Map;
 
 public class CategoryController {
 
-    // 1. 자주 사용할 Service와 Print 객체를 선언하고, Controller 객체 생성 시 생성되도록 작성하세요.
-    private final CategoryService categoryService;
-    private final CategoryPrint categoryPrint;
-
-    public CategoryController(CategoryService categoryService, CategoryPrint categoryPrint) {
-        this.categoryService = categoryService;
-        this.categoryPrint = categoryPrint;
-    }
+    private final CategoryService categoryService = new CategoryService();
+    private final CategoryPrint categoryPrint = new CategoryPrint();
 
     public void selectCategoryList(Map<String, String> parameter) {
 
