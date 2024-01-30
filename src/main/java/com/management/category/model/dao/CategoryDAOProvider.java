@@ -43,18 +43,16 @@ public class CategoryDAOProvider {
     public String updateCategory(CategoryDTO category) {
 
         SQL sql = new SQL()
-                .UPDATE("PRODUCT_CATEGORY")
-                   .SET("PRODUCT_NAME = #{ productName}");
-        // 3. Provider를 활용하여 제품분류명을 수정하는 코드를 작성하세요.
+                  .UPDATE("PRODUCT_CATEGORY")
+                     .SET("PRODUCT_NAME = #{ productName}");
         return toString();
 
     }
 
     public String deleteCategory(Map<String, String> parameter) {
-
-        // 4. Provider를 활용하여 제품분류를 삭제하는 코드를 작성하세요.
-        //    아래 작성된 return null은 과제 툴 오류를 제거하고자 임의 작성하였으니 지우고 로직을 작성하세요.
-        return null;
-
+        return new SQL()
+             .DELETE_FROM("PRODUCT_CATEGORY")
+                   .WHERE("CATEGORY_CODE = #{categoryCode}")
+                .toString();
     }
 }

@@ -21,4 +21,8 @@ public interface CategoryDAO {
     @ResultMap("ResultMap")
     @UpdateProvider(type = CategoryDAOProvider.class, method = "modifyCategoryName")
     int modifyCategoryName(CategoryDTO category);
+
+    @ResultMap("ResultMap")
+    @DeleteProvider(type = CategoryDAOProvider.class, method = "deleteCategory")
+    int deleteCategory(@Param("categoryCode") Map<String, String> parameter);
 }

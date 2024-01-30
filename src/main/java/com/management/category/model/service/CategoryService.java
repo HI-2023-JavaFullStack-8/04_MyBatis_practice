@@ -43,25 +43,33 @@ public class CategoryService {
 
     public boolean modifyCategoryName(CategoryDTO category) {
 
-        // 4. 제품분류명을 수정하는 로직을 작성하세요.
-
         SqlSession sqlSession = getSqlSession();
 
         categoryDAO = sqlSession.getMapper(CategoryDAO.class);
         int result = categoryDAO.modifyCategoryName(category);
 
-
-
-        // 　　아래 작성된 return false 과제 툴 오류를 제거하고자 임의 작성하였으니 지우고 로직을 작성하세요.
-        return false;
+        if(result > 0) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+        return result > 0? true : false;
 
     }
 
     public boolean deleteCategory(Map<String, String> parameter) {
 
-        // 5. 제품분류 정보를 삭제하는 로직을 작성하세요.
-        // 　　아래 작성된 return false 과제 툴 오류를 제거하고자 임의 작성하였으니 지우고 로직을 작성하세요.
-        return false;
+        SqlSession sqlSession = getSqlSession();
+
+        categoryDAO = sqlSession.getMapper(CategoryDAO.class);
+        int result = categoryDAO.deleteCategory(parameter);
+
+        if(result > 0) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+        return result > 0? true : false;
 
     }
 }

@@ -32,12 +32,12 @@ public class CategoryPrint {
 
     public void printSuccessMessage(String successCode) {
 
-        // 2. 성공메시지를 출력하는 메소드
-        //    (조건) 성공코드를 전달받아 각각의 요청에 대해 성공을 알리는 메시지를 출력하세요.
         String successMessage = "";
 
         switch (successCode) {
             case "register": successMessage = "카테고리 신설에 성공하였습니다."; break;
+            case "modify": successMessage = "카테고리 수정에 성공하였습니다."; break;
+            case "delete": successMessage = "카테고리 삭제에 성공하였습니다."; break;
         }
         System.out.println(successMessage);
 
@@ -45,13 +45,14 @@ public class CategoryPrint {
 
     public void printErrorMessage(String errorCode) {
 
-        // 3. 에러메시지를 출력하는 메소드
-        //    (조건) 에러코드를 전달받아 각각의 요청에 대해 에러를 알리는 메시지를 출력하세요.
         String errorMessage = "";
 
         switch (errorCode) {
             case "select" : errorMessage = "메뉴 조회에 실패했습니다."; break;
             case "register" : errorMessage = "카테고리 신설에 실패했습니다."; break;
+            case "modify": errorMessage = "카테고리 수정에 실패하였습니다."; break;
+            case "delete": errorMessage = "카테고리 삭제에 실패하였습니다."; break;
+
         }
 
         System.out.println(errorMessage);
