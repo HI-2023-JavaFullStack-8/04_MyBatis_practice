@@ -1,5 +1,6 @@
 package com.common;
 
+import com.management.category.model.dao.CategoryDAO;
 import com.management.product.model.dao.ProductDAO;
 import org.apache.ibatis.datasource.pooled.PooledDataSource;
 import org.apache.ibatis.mapping.Environment;
@@ -17,7 +18,7 @@ public class Template {
 
 
 
-    private static String URL = "jdbc:mysql://localhost/productcompany";
+    private static String URL = "jdbc:mysql://localhost/productCompany";
     private static String USER = "ohgiraffers";
     private static String PASSWORD = "ohgiraffers";
 
@@ -31,6 +32,7 @@ public class Template {
             Configuration configuration = new Configuration(environment);
 
             configuration.addMapper(ProductDAO.class);
+            configuration.addMapper(CategoryDAO.class);
 
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
         }

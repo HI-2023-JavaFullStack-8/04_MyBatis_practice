@@ -14,15 +14,13 @@ public interface CategoryDAO {
     @SelectProvider(type = CategoryDAOProvider.class, method = "selectCategoryList")
     List<CategoryDTO> selectCategoryList(Map<String, String> parameter);
 
-    @ResultMap("ResultMap")
-    @InsertProvider(type = CategoryDAOProvider.class, method = "registNewProduct")
+
+    @InsertProvider(type = CategoryDAOProvider.class, method = "insertCategory")
     int registNewProduct(CategoryDTO category);
 
-    @ResultMap("ResultMap")
-    @UpdateProvider(type = CategoryDAOProvider.class, method = "modifyCategoryName")
+    @UpdateProvider(type = CategoryDAOProvider.class, method = "updateCategory")
     int modifyCategoryName(CategoryDTO category);
 
-    @ResultMap("ResultMap")
     @DeleteProvider(type = CategoryDAOProvider.class, method = "deleteCategory")
     int deleteCategory(@Param("categoryCode") Map<String, String> parameter);
 }

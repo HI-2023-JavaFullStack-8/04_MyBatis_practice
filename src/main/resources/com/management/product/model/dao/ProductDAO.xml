@@ -44,6 +44,7 @@
                 PRODUCT_NAME LIKE CONCAT ('%', #{searchValue}, '%')
             </if>
             <if test="searchOption == 'salesStore'">
+                <if test=""
                 <![CDATA[AND (DISCOUNT_RATE = 0 OR DISCOUNT_RATE <= 1)]]>
             </if>
             <if test="newProduct">
