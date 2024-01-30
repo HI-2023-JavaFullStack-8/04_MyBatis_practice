@@ -54,7 +54,7 @@ public class ProductController {
         productDTO.setSalesQuantity(salesQuantity);
         productDTO.setProductionStatus(productionStatus);
 
-        if(productService.modifyProductInfo(productDTO) == true) {
+        if(productService.modifyProductInfo(productDTO)) {
             printResult.printSuccessMessage("update");
         } else {
             printResult.printErrorMessage("update");

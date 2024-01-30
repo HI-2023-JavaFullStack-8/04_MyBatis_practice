@@ -70,6 +70,5 @@ public class CategoryService {
             sqlSession.rollback();
         }
         return result > 0? true : false;
-
     }
 }

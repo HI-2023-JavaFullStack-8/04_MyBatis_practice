@@ -17,7 +17,6 @@ public class CategoryController {
         this.categoryPrint = categoryPrint;
     }
 
-
     public void selectCategoryList(Map<String, String> parameter) {
 
         List<CategoryDTO> categoryList = categoryService.selectCategoryList(parameter);
@@ -44,7 +43,7 @@ public class CategoryController {
 
         categoryService.modifyCategoryName(category);
 
-        if(categoryService.modifyCategoryName(category) == true) {
+        if(categoryService.modifyCategoryName(category)) {
             categoryPrint.printSuccessMessage("modify");
         } else {
             categoryPrint.printErrorMessage("modify");
@@ -53,12 +52,7 @@ public class CategoryController {
 
     public void deleteCategory(Map<String, String> parameter) {
 
-        String categoryCode = parameter.get("categoryCode");
-
-        CategoryDTO categoryDTO = new CategoryDTO();
-        categoryDTO.setCategoryCode(categoryCode);
-
-        if(categoryService.deleteCategory(categoryDTO)) {
+        if(categoryService.deleteCategory(parameter)) {
             categoryPrint.printSuccessMessage("delete");
         } else {
             categoryPrint.printErrorMessage("delete");
