@@ -7,36 +7,62 @@ import java.util.List;
 
 public class ProductPrint {
 
-    // * 모든 출력은 System.out.println()을 통해 콘솔에 출력하는 것을 의미합니다.
-    // 주석을 지우고 다음 네 가지 메소드를 작성하세요.
-
     public void printAllProductList(List<ProductDTO> allProductList) {
 
-        // 1. 전체 조회한 목록 출력하는 메소드
-        //    (조건) List<ProductDTO>로 받아온 데이터 목록을 전체 출력하세요.
+        System.out.println("===== 조회한 제품 리스트 =====");
 
+        for (ProductDTO product : allProductList) {
+            System.out.println(product);
+        }
     }
 
     public void printProductList(List<ProductDTO> productList, SearchCondition searchCondition) {
-
-        // 2. 조건에 따라 조회한 목록을 출력하는 메소드
-        //    (조건 1) SearchCondition 객체로 검색 조건이 무엇인지 출력하세요.
-        //    (조건 2) List<ProductDTO>로 받아온 데이터 목록을 전체 출력하세요.
-
+        System.out.println("===== 검색 조건 =====");
+        System.out.println(searchCondition);
+        for (ProductDTO product : productList) {
+            System.out.println(product);
+        }
     }
 
     public void printSuccessMessage(String successCode) {
+        String successMessage = "";
 
-        // 3. 성공메시지를 출력하는 메소드
-        //    (조건) 성공코드를 전달받아 성공을 알리는 메시지를 출력하세요.
+        switch (successCode) {
+            case "insert":
+                successMessage = "신규 메뉴 등록을 성공하였습니다.";
+                break;
+            case "update":
+                successMessage = "메뉴 수정을 성공하였습니다.";
+                break;
+            case "delete":
+                successMessage = "메뉴 삭제를 성공하였습니다.";
+        }
+        System.out.println(successMessage);
 
     }
 
     public void printErrorMessage(String errorCode) {
+        String errorMessage = "";
 
-        // 4. 에러메시지를 출력하는 메소드
-        //    (조건) 에러코드를 전달받아 에러를 알리는 메시지를 출력하세요.
+        switch (errorCode) {
+            case "selectList":
+                errorMessage = "전체 메뉴 목록 조회에 실패했습니다.";
+                break;
+            case "selectCondition":
+                errorMessage = "조건과 일치하는 목록 조회에 실패했습니다.";
+                break;
+            case "insert":
+                errorMessage = "신규 메뉴 등록에 실패하였습니다.";
+                break;
+            case "update":
+                errorMessage = "메뉴 수정에 실패하였습니다.";
+                break;
+            case "delete":
+                errorMessage = "메뉴 삭제에 실패하였습니다.";
+                break;
+        }
 
+        System.out.println(errorMessage);
     }
 
 }
